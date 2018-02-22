@@ -16,8 +16,6 @@ HaySense library by Markus Kreitzer
 #define POWER_ON_DELAY 10 // Delay before sensors are powered on.
 #define TIMER_PERIOD 1000 // One second in milis
 
-FreqPeriodCounter counter(MOISTURE_PIN, micros, 0);
-
 // This is your main class that users will import into their application
 class HaySense
 {
@@ -29,6 +27,7 @@ public:
   float get_moisture_freq(void);
   void power_on_sensors(void);
   void power_off_sensors(void);
+  void counterISR();
 
 private:
   void detect_pulse(void);

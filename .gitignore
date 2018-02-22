@@ -1,6 +1,9 @@
 # Prerequisites
 *.d
 
+# Photon Firmware files
+*.bin
+
 # Compiled Object files
 *.slo
 *.lo

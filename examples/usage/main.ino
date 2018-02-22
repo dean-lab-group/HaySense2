@@ -1,5 +1,6 @@
 #include "Particle.h"
 #include "HaySense.h"
+#define SERIAL_DELAY 10
 // SYSTEM_MODE(SEMI_AUTOMATIC); //disable automatic particle cloud connection
 // SYSTEM_MODE(MANUAL); //disable automatic particle cloud connection
 // SYSTEM_THREAD(ENABLED);
