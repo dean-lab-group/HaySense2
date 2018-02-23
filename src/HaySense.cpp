@@ -11,14 +11,14 @@ HaySense::HaySense()
     pinMode(MOISTURE_PIN, INPUT_PULLDOWN);
     pinMode(TEMPERATURE_PIN, INPUT_PULLDOWN);
     pinMode(SENSOR_POWER_PIN, OUTPUT);
-    attachInterrupt(MOISTURE_PIN, counterISR, CHANGE);
+    attachInterrupt(MOISTURE_PIN, &HaySense::counterISR, this, CHANGE);
     // be sure not to call anything that requires hardware be initialized here,
     // put those in begin()
 }
 
 // Public
 float HaySense::get_temperature_freq(void){
-    //Log.trace("Getting temperature frequency.");
+    Log.trace("Getting temperature frequency.");
     unsigned long temp_period_low = pulseIn(TEMPERATURE_PIN, LOW);
     unsigned long temp_period_high = pulseIn(TEMPERATURE_PIN, HIGH);
     return (1000000.0 * (1.0/(float)(temp_period_low + temp_period_high)));
@@ -30,7 +30,7 @@ float HaySense::get_moisture_freq(void){
 }
 
 void HaySense::power_on_sensors(){
-    //Log.trace("Powering on sensors");
+    Log.trace("Powering on sensors");
     // Turns on sensors (sensors are active-low)
     pinResetFast(SENSOR_POWER_PIN);
 }

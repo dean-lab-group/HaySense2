@@ -1,16 +1,18 @@
 #include "Particle.h"
 #include "HaySense.h"
+
 #define SERIAL_DELAY 10
-// SYSTEM_MODE(SEMI_AUTOMATIC); //disable automatic particle cloud connection
-// SYSTEM_MODE(MANUAL); //disable automatic particle cloud connection
-// SYSTEM_THREAD(ENABLED);
 HaySense hs;
 SerialLogHandler logHandler(115200, LOG_LEVEL_ERROR);
 
 void setup(void){
     Serial.begin(115200);
+    // Need this here so the Particle can initialize itself properly. But not
+    // neccesary.
     delay(SERIAL_DELAY);
     Serial.println("Serial Activated");
+    // Turn power on to sensor's ocillator circuit. May need a delay after this
+    // to wait for the oscillator to stabilize.
     hs.power_on_sensors();
 }
 

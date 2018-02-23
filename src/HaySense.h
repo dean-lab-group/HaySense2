@@ -1,5 +1,4 @@
 #pragma once
-
 /*
 HaySense library by Markus Kreitzer
 */
