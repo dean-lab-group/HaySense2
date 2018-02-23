@@ -1,22 +1,13 @@
 # HaySense
 
-A Particle library for HaySense
+A Particle library for interfacing with [our](https://github.com/dean-lab-group) haybale environmental sensor feather.
 
-## Welcome to your library!
 
-To get started, modify the sources in [src](src). Rename the example folder inside [examples](examples) to a more meaningful name and add additional examples in separate folders.
-
-To compile your example you can use `particle compile examples/usage` command in [Particle CLI](https://docs.particle.io/guide/tools-and-features/cli#update-your-device-remotely) or use our [Desktop IDE](https://docs.particle.io/guide/tools-and-features/dev/#compiling-code).
-
-Libraries can also depend on other libraries. To add a dependency use [`particle library add`](https://docs.particle.io/guide/tools-and-features/cli#adding-a-library) or [library management](https://docs.particle.io/guide/tools-and-features/dev/#managing-libraries) in Desktop IDE.
-
-After the library is done you can upload it with `particle library upload` or `Upload` command in the IDE. This will create a private (only visible by you) library that you can use in other projects. If you wish to make your library public, use `particle library publish` or `Publish` command.
-
-_TODO: update this README_
+**This library depends on** [FreqPeriodCounter](https://github.com/elec3647/FreqPeriodCounter) (follow link to clone)
 
 ## Usage
 
-Connect XYZ hardware, add the HaySense library to your project and follow this simple example:
+Connect your hardware, add the HaySense library to your project and follow this simple example:
 
 ```
 #include "HaySense.h"
@@ -30,12 +21,12 @@ void loop() {
   haySense.process();
 }
 ```
+Ensure that [FreqPeriodCounter](https://github.com/elec3647/FreqPeriodCounter) is also in your build path.
 
-See the [examples](examples) folder for more details.
+See the [examples](examples) folder for more details on using this library.
 
 ## Documentation
-
-TODO: Describe `HaySense`
+The sensors output pretty noisy data so its best to take a [moving average](https://en.wikipedia.org/wiki/Moving_average) of several samples.
 
 ## Contributing
 
@@ -56,6 +47,4 @@ At this point, you can create a [GitHub pull request](https://help.github.com/ar
 If you wish to make your library public, use `particle library publish` or `Publish` command.
 
 ## LICENSE
-Copyright 2018 Markus Kreitzer
-
-Licensed under the <insert your choice of license here> license
+See [LICENSE.md](LICENSE.md) for details.
