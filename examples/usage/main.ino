@@ -13,20 +13,20 @@ void setup(void){
     Serial.println("Serial Activated");
     // Turn power on to sensor's ocillator circuit. May need a delay after this
     // to wait for the oscillator to stabilize.
-    hs.power_on_sensors();
+    // hs.power_on_sensors();
 }
 
 void loop(void){
     Log.trace("Entering loop");
     // Get stuff. I need to move the stuff below to a class...
-    float temperature_frequency = hs.get_temperature_freq();
-    Log.trace(String(temperature_frequency));
-    float moisture_frequency = hs.get_moisture_freq();
-    Log.trace(String(moisture_frequency));
+    float temperature = hs.get_temperature();
+    Log.trace(String(temperature));
+    float moisture = hs.get_moisture();
+    Log.trace(String(moisture));
 
     // Print info to serial.
-    Serial.print(temperature_frequency);
+    Serial.print(temperature);
     Serial.print(", ");
-    Serial.println(moisture_frequency);
+    Serial.println(moisture);
     delay(500);
 }

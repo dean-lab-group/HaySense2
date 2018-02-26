@@ -20,15 +20,15 @@ class HaySense
 {
 public:
   HaySense();
-  // Eventually these "freq" methods will be private and the actual temp and
-  // moisture readings will be the only thing that is public.
-  float get_temperature_freq(void);
-  float get_moisture_freq(void);
+  float get_temperature(void);
+  float get_moisture(void);
   void power_on_sensors(void);
   void power_off_sensors(void);
   void counterISR();
 
 private:
+  float get_temperature_freq(void);
+  float get_moisture_freq(void);
   void detect_pulse(void);
   float get_battery_voltage(void);
   float convert_moisture(float temp_hz, float moist_hz, float calibration_values[4]);
