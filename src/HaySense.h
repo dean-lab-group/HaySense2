@@ -20,17 +20,30 @@ class HaySense
 {
 public:
   HaySense();
-  float get_temperature(void);
-  float get_moisture(void);
+  float get_temperature_freq(void);
+  float get_moisture_freq(void);
   void power_on_sensors(void);
   void power_off_sensors(void);
   void counterISR();
 
 private:
-  float get_temperature_freq(void);
-  float get_moisture_freq(void);
-  void detect_pulse(void);
+  //void detect_pulse(void);
   float get_battery_voltage(void);
-  float convert_moisture(float temp_hz, float moist_hz, float calibration_values[4]);
-  float convert_temperature(float temp_hz, float calibration_values[2]);
+};
+
+class Converter
+{
+public:
+  Converter(float *moist_constants, float *temp_constants);
+  float GetMoisture(float moist_hz, float temp_hz);
+  float GetTemperature(float temp_hz);
+
+private:
+  float *moisture_constants;
+  float *temperature_constants;
+  float temperature_hz;
+  float y_0();
+  float y_100();
+  float slope_prime(void);
+  float intercept_prime(void);
 };

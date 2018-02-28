@@ -2,8 +2,11 @@
 #include "HaySense.h"
 
 #define SERIAL_DELAY 10
+SerialLogHandler logHandler(115200, LOG_LEVEL_ALL);
 HaySense hs;
-SerialLogHandler logHandler(115200, LOG_LEVEL_ERROR);
+float moisture_calibration[] = {-0.2744, 17645, 0.979, 109.22};
+float temperature_calibration[] = {0.0044, 7.6176};
+Converter conv(moisture_calibration, temperature_calibration);
 
 void setup(void){
     Serial.begin(115200);
@@ -19,14 +22,15 @@ void setup(void){
 void loop(void){
     Log.trace("Entering loop");
     // Get stuff. I need to move the stuff below to a class...
-    float temperature = hs.get_temperature();
-    Log.trace(String(temperature));
-    float moisture = hs.get_moisture();
+    float temp_freq = hs.get_temperature_freq();
+    float moist_freq = hs.get_moisture_freq();
+    float temperature = conv.GetTemperature(temp_freq);
+    float moisture = conv.GetMoisture(temp_freq, moist_freq);
     Log.trace(String(moisture));
 
     // Print info to serial.
-    Serial.print(temperature);
-    Serial.print(", ");
-    Serial.println(moisture);
-    delay(500);
+    Serial.println("{temperature_c: " + String(temperature) + ", temperature_hz: " + String(temp_freq) + "}");
+    Serial.println("{moisture_perc: " + String(moisture) + ", moisture_hz: " + String(moist_freq) + "}");
+    //Serial.println(moisture);
+    delay(1000);
 }
